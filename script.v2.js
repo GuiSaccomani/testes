@@ -44,11 +44,16 @@ function initBotaoNao() {
     const btnSim = document.getElementById('btn-sim');
     const msgNao = document.getElementById('msg-nao');
 
+    let simBlocked = false;
+
     // Previne clique para não dar erro duplo no touch
     btnNao.addEventListener('click', (e) => e.preventDefault());
 
     function fugir(e) {
         e.preventDefault();
+        
+        simBlocked = true;
+        setTimeout(() => simBlocked = false, 400);
         
         // Vibração curta se o celular suportar
         if (navigator.vibrate) {
@@ -77,7 +82,11 @@ function initBotaoNao() {
         const btnW = btnNao.offsetWidth;
         const btnH = btnNao.offsetHeight;
         const simRect = btnSim.getBoundingClientRect();
-        const contentTopRect = document.querySelector('.content-top').getBoundingClientRect();
+        
+        const titleRect = document.getElementById('titulo-principal').getBoundingClientRect();
+        const commentRect = document.querySelector('.text-comment').getBoundingClientRect();
+        const maxYTopText = Math.max(titleRect.bottom, commentRect.bottom);
+        
         const margin = 16;
 
         let x, y;
@@ -88,14 +97,14 @@ function initBotaoNao() {
         while (!valid && tries < 50) {
             x = margin + Math.random() * (window.innerWidth - btnW - margin * 2);
             
-            const minY = contentTopRect.bottom + margin;
+            const minY = maxYTopText + 40; // Espaço seguro abaixo do texto
             const maxY = simRect.top - btnH - margin;
             
             if (maxY > minY) {
                 y = minY + Math.random() * (maxY - minY);
             } else {
-                // Fallback de segurança se a tela for minúscula
-                y = margin + Math.random() * (window.innerHeight - btnH - margin * 2);
+                // Fallback de segurança: tenta ficar só na metade inferior da tela, sem passar do SIM
+                y = (window.innerHeight / 2) + Math.random() * ((simRect.top - btnH) - (window.innerHeight / 2));
             }
             valid = true;
             tries++;
@@ -129,7 +138,11 @@ function initBotaoNao() {
         }
     });
 
-    btnSim.addEventListener('click', () => {
+    btnSim.addEventListener('click', (e) => {
+        if (simBlocked) {
+            e.preventDefault();
+            return;
+        }
         changeScreen('tela-1', 'tela-2');
         const stamp = document.getElementById('stamp-confirmado');
         stamp.classList.add('show');
