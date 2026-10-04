@@ -1,0 +1,537 @@
+/*
+  Paleta obrigatória: verde suave + vinho + neutros.
+  Estilo: minimalista, elegante e delicado.
+*/
+:root {
+  --olive: #7b8a74;
+  --olive-soft: #9aa592;
+  --wine: #6f2338;
+  --wine-soft: #8f4a5d;
+  --cream: #f4efe5;
+  --beige: #ede4d7;
+  --white: #ffffff;
+  --text: #3e3734;
+  --line: rgba(111, 35, 56, 0.18);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--cream) 0%, #f8f5ee 100%);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+.container {
+  width: min(92%, 1100px);
+  margin: 0 auto;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", serif;
+  color: var(--wine);
+  letter-spacing: 0.2px;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.18;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin-bottom: 1.2rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  padding: 2rem 0;
+}
+
+.hero__texture {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(123, 138, 116, 0.2) 0, transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(111, 35, 56, 0.17) 0, transparent 42%),
+    radial-gradient(circle at 50% 80%, rgba(154, 165, 146, 0.15) 0, transparent 45%);
+}
+
+.hero__content {
+  text-align: center;
+}
+
+.hero__kicker {
+  display: inline-block;
+  color: var(--olive);
+  font-weight: 500;
+  border: 1px solid rgba(123, 138, 116, 0.35);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero__subtitle {
+  max-width: 620px;
+  margin: 1rem auto 0;
+  color: #5d5551;
+}
+
+/* Typewriter placeholder (JS will fill text) */
+.hero__subtitle .tw { display: inline-block; white-space: pre-wrap; }
+
+/* Hero SVG petals (decorative instances will be inserted by CSS/JS) */
+.hero-petal {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  color: rgba(111,35,56,0.12);
+  transform-origin: center;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+@keyframes petalFloat {
+  0% { transform: translateY(0) rotate(0) scale(0.9); opacity: 0; }
+  10% { opacity: 0.6; }
+  100% { transform: translateY(-140px) rotate(30deg) scale(1.05); opacity: 0; }
+}
+
+.flower {
+  position: absolute;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  opacity: 0.3;
+  animation: float 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.flower--one {
+  left: 8%;
+  top: 18%;
+}
+
+.flower--two {
+  right: 9%;
+  top: 22%;
+  animation-delay: 1s;
+}
+
+.flower--three {
+  left: 15%;
+  bottom: 15%;
+  animation-delay: 2s;
+}
+
+.soft-grid,
+.thoughts-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.soft-card,
+.thought-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.1rem 1rem;
+  backdrop-filter: blur(2px);
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+/* Extra hidden text inside interactive cards */
+.soft-card .extra {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 420ms ease, opacity 420ms ease, transform 420ms ease;
+  transform: translateY(6px);
+  color: #6b605d;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+}
+.soft-card.expanded {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(80,70,65,0.06);
+}
+.soft-card.expanded .extra {
+  max-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.soft-card:focus {
+  outline: 2px solid rgba(123,138,116,0.16);
+  outline-offset: 6px;
+}
+
+.soft-card:hover,
+.thought-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(123, 138, 116, 0.4);
+  box-shadow: 0 12px 24px rgba(80, 70, 65, 0.08);
+}
+
+/* playful tilt + subtle 3D effect on hover */
+.soft-card {
+  transform-origin: center;
+  will-change: transform;
+}
+.soft-card.hovered {
+  transform: perspective(800px) translateY(-8px) rotateX(2deg) rotateY(-2deg) scale(1.01);
+  box-shadow: 0 22px 44px rgba(80,70,65,0.08);
+}
+
+/* cursor particle */
+.cursor-petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 14px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1), opacity 900ms ease;
+}
+
+/* small click pop for buttons */
+.btn-pop {
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+}
+.btn-pop:active { transform: scale(0.96); }
+
+/* Big interactive flowers stage */
+.big-flower {
+  position: fixed;
+  width: 96px;
+  height: 120px;
+  pointer-events: auto;
+  z-index: 9997;
+  transform-origin: center bottom;
+  transition: transform 360ms cubic-bezier(.2,.9,.2,1), opacity 360ms ease;
+  will-change: transform, opacity;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+}
+.big-flower .msg {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 0.4rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--wine);
+  box-shadow: 0 8px 18px rgba(80,70,65,0.08);
+  opacity: 0;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+.big-flower.show-msg .msg { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+@keyframes floatUpSlow {
+  0% { transform: translateY(6vh) rotate(-6deg) scale(0.98); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-110vh) rotate(12deg) scale(1); opacity: 0.95; }
+}
+
+/* Stage button */
+.stage-btn {
+  position: absolute;
+  right: 3.6rem;
+  bottom: 8vh;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 1px solid rgba(95,32,48,0.08);
+  background: linear-gradient(180deg, var(--wine), var(--wine-soft));
+  color: var(--white);
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(80,70,65,0.08);
+}
+.stage-btn:active { transform: scale(0.96); }
+
+/* draggable flower styling */
+.draggable-flower {
+  position: absolute;
+  right: 6.5rem;
+  bottom: 5.8rem;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 8px 18px rgba(80,70,65,0.06);
+  cursor: grab;
+  font-size: 28px;
+  z-index: 10000;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.draggable-flower:active { cursor: grabbing; transform: scale(0.98); }
+
+/* sparkle click effect */
+.sparkle {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.6));
+  box-shadow: 0 0 14px rgba(255,255,255,0.9), 0 0 30px rgba(123,35,56,0.08);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0.92;
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1), opacity 900ms ease;
+}
+
+/* Memory box: interactive surprise */
+.memory-wrap {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+.memory-box {
+  --size: 96px;
+  width: var(--size);
+  height: calc(var(--size) * 0.72);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,245,240,0.98));
+  border: 1px solid rgba(111,35,56,0.08);
+  display: grid;
+  place-items: center;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(80,70,65,0.06);
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+.memory-box:active { transform: scale(0.98); }
+.memory-box .box-base {
+  position: absolute;
+  width: 76%;
+  height: 48%;
+  background: linear-gradient(180deg, var(--beige), var(--cream));
+  border-radius: 6px;
+  bottom: 12%;
+}
+.memory-box .box-lid {
+  position: absolute;
+  width: 84%;
+  height: 34%;
+  background: linear-gradient(180deg, var(--wine-soft), var(--wine));
+  border-radius: 6px 6px 0 0;
+  top: -6%;
+  transform-origin: center bottom;
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+.memory-box.open .box-lid { transform: rotateX(62deg) translateY(-10%); }
+.box-ribbon { position: absolute; top: 10%; font-size: 1.1rem; }
+
+.memory-popup {
+  position: fixed;
+  left: 50%;
+  top: 22%;
+  transform: translateX(-50%) translateY(-6px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,245,240,0.98));
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  box-shadow: 0 18px 46px rgba(80,70,65,0.08);
+  font-family: 'Playfair Display', serif;
+  color: var(--wine);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease, transform 320ms cubic-bezier(.2,.8,.2,1);
+  z-index: 10001;
+  max-width: 90%;
+}
+.memory-popup.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.memory-text { margin-bottom: 0.6rem; color: #5b4b4e; }
+.memory-list { list-style: none; padding-left: 0.6rem; color: #6b605d; }
+.memory-list li { margin: 0.4rem 0; }
+.memory-actions { margin-top: 0.6rem; text-align: right; }
+.tiny { background: transparent; border: 1px solid rgba(111,35,56,0.08); padding: 0.4rem 0.6rem; border-radius: 8px; color: var(--wine); cursor: pointer; }
+.tiny.saved { background: linear-gradient(180deg, rgba(111,35,56,0.08), rgba(111,35,56,0.04)); }
+
+/* small confetti/petals spawned by the box */
+.confetti {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 10002;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1), opacity 900ms ease;
+  font-size: 14px;
+}
+
+.section--accent {
+  background: linear-gradient(180deg, rgba(111, 35, 56, 0.05), rgba(123, 138, 116, 0.06));
+  border-top: 1px solid rgba(111, 35, 56, 0.12);
+  border-bottom: 1px solid rgba(123, 138, 116, 0.18);
+}
+
+.thought-card p {
+  font-weight: 500;
+  color: var(--wine);
+}
+
+.special-text {
+  max-width: 800px;
+  font-size: 1.03rem;
+}
+
+.reveal-btn {
+  border: 1px solid transparent;
+  background: var(--wine);
+  color: var(--white);
+  padding: 0.82rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.97rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 200ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.reveal-btn:hover {
+  background: var(--wine-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(111, 35, 56, 0.22);
+}
+
+.reveal-btn:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 3px;
+}
+
+.hidden-message {
+  margin-top: 1rem;
+  max-width: 700px;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: rgba(123, 138, 116, 0.09);
+  border: 1px solid rgba(123, 138, 116, 0.3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 380ms ease, transform 380ms ease;
+  pointer-events: none;
+}
+
+.hidden-message.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem 1rem 2.2rem;
+  color: #675d59;
+  border-top: 1px solid rgba(111, 35, 56, 0.15);
+}
+
+/* Animação de entrada suave para seções */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.js .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Camada fixa com flores discretas no scroll */
+#floating-flowers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.scroll-flower {
+  position: absolute;
+  font-size: 0.92rem;
+  opacity: 0;
+  animation: riseAndFade 2200ms ease forwards;
+}
+
+@keyframes riseAndFade {
+  0% {
+    transform: translateY(8px) scale(0.95);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.28;
+  }
+  100% {
+    transform: translateY(-38px) scale(1.02);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Responsividade mobile-first */
+@media (min-width: 700px) {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .soft-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .thoughts-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .soft-card,
+  .thought-card {
+    padding: 1.25rem 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

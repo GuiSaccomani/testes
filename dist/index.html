@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#EFE7D6">
+    <title>Convite</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Convite">
+    <meta property="og:description" content="Tenho uma pergunta pra você.">
+    <meta property="og:type" content="website">
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600&family=Special+Elite&display=swap" rel="stylesheet">
+    
+  <script type="module" crossorigin src="/assets/index-CYxaGuME.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Dre14lPC.css">
+</head>
+<body>
+    <!-- Formulário Invisível para o Netlify Forms -->
+    <form name="convite" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="text" name="bot-field">
+        <input type="text" name="programa">
+        <input type="text" name="dia">
+        <input type="text" name="horario">
+        <input type="number" name="tentativas_no">
+        <input type="text" name="data_hora_resposta">
+    </form>
+
+    <!-- Fita adesiva (detalhe decorativo no desktop e celular) -->
+    <div class="tape tape-1"></div>
+
+    <div class="container">
+        
+        <!-- TELA 1: Inicial -->
+        <div id="tela-1" class="screen active">
+            <div class="content-top">
+                <h1 id="titulo-principal">VOCÊ QUER SAIR COMIGO?</h1>
+                <div class="handwriting text-comment">(responde com carinho)</div>
+            </div>
+            
+            <div id="msg-nao" class="handwriting comment hidden"></div>
+            
+            <div class="botoes-bottom">
+                <button id="btn-nao">NÃO</button>
+                <button id="btn-sim" class="primary">SIM</button>
+            </div>
+        </div>
+
+        <!-- TELA 2: Escolha do Programa -->
+        <div id="tela-2" class="screen">
+            <div class="stamp" id="stamp-confirmado">CONFIRMADO</div>
+            
+            <div class="content-top">
+                <h2>AGORA ESCOLHE O ROLÊ</h2>
+                
+                <ul class="options-list">
+                    <li class="option-item" data-opcao="Cinema">
+                        <span class="option-num">01</span> Cinema
+                    </li>
+                    <li class="option-item" data-opcao="Bar">
+                        <span class="option-num">02</span> Bar
+                    </li>
+                    <li class="option-item" data-opcao="Restaurante">
+                        <span class="option-num">03</span> Restaurante
+                    </li>
+                    <li class="option-item" data-opcao="Bater perna">
+                        <span class="option-num">04</span> Bater perna
+                    </li>
+                    <li class="option-item" data-opcao="Eu cozinho pra você (com vinho)">
+                        <span class="option-num">05</span> Eu cozinho pra você <br>(com vinho)
+                    </li>
+                </ul>
+                <div id="msg-opcao" class="handwriting comment-inline hidden">boa escolha!</div>
+            </div>
+        </div>
+
+        <!-- TELA 3: Escolha do Dia -->
+        <div id="tela-3" class="screen">
+            <div class="content-top">
+                <h2>QUAL DIA FICA BOM?</h2>
+                
+                <div class="calendar-nav">
+                    <button id="btn-prev-month" class="nav-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <span id="month-label" class="handwriting month-label">Mês</span>
+                    <button id="btn-next-month" class="nav-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+                
+                <div class="calendar" id="calendar">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+            
+            <div class="fixed-bottom">
+                <button id="btn-avancar-data" class="primary w-100 hidden">CONTINUAR</button>
+            </div>
+        </div>
+
+        <!-- TELA 4: Escolha do Horário -->
+        <div id="tela-4" class="screen">
+            <div class="content-top">
+                <h2>E QUAL HORÁRIO?</h2>
+                
+                <div class="time-grid">
+                    <button class="time-tag">12:00</button>
+                    <button class="time-tag">15:00</button>
+                    <button class="time-tag">18:00</button>
+                    <button class="time-tag">19:30</button>
+                    <button class="time-tag">20:00</button>
+                    <button class="time-tag">21:00</button>
+                </div>
+                
+                <div class="custom-time-wrapper">
+                    <span class="handwriting">ou digite: </span>
+                    <input type="text" id="input-hora" inputmode="numeric" placeholder="00:00" maxlength="5">
+                </div>
+            </div>
+            
+            <div class="fixed-bottom">
+                <button id="btn-finalizar" class="primary w-100 hidden">CONFIRMAR</button>
+            </div>
+        </div>
+
+        <!-- TELA 5: Ingresso Final -->
+        <div id="tela-5" class="screen">
+            <h2 class="rotated-title">VALEU! LOGO, LOGO CHEGA O CONVITE.</h2>
+            
+            <div class="ticket">
+                <div class="ticket-top">
+                    <h3 class="ticket-title">INGRESSO</h3>
+                    <span class="ticket-serial">Nº 0001</span>
+                </div>
+                <div class="ticket-content">
+                    <p><strong>ROLÊ:</strong> <span id="ticket-role"></span></p>
+                    <p><strong>DIA:</strong> <span id="ticket-dia"></span></p>
+                    <p><strong>HORA:</strong> <span id="ticket-hora"></span></p>
+                </div>
+                
+                <div class="cut-line"></div>
+                
+                <div class="ticket-action">
+                    <button id="btn-whatsapp" class="primary w-100 btn-discreto">AVISAR NO WHATSAPP</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
